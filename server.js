@@ -1,21 +1,24 @@
-require("dotenv").config();
-const Sequelize = require("sequelize");
+const express = require("express");
+const routes = require("./controllers");
+// import sequelize connection
+const sequelize = require("./config/connection");
 
-let sequelize;
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-if (process.env.JAWSDB_URL) {
-  sequelize = new Sequelize(process.env.JAWSDB_URL);
-} else {
-  sequelize = new Sequelize(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PW,
-    {
-      host: "localhost",
-      dialect: "mysql",
-      port: 3306,
-    }
-  );
-}
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-module.exports = sequelize;
+app.use(routes);
+
+// sync sequelize models to the database, then turn on the server
+// { force: true } for new changes
+sequelize.sync({ force: true }).then(
+  app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
+  })
+);
+
+// app.listen(PORT, () => {
+//   console.log(`App listening on port ${PORT}!`);
+// });
