@@ -26,8 +26,9 @@ router.get("/", (req, res) => {
       //res.render("homepage", dbPostData[0]);
       const posts = dbPostData.map(post => post.get({ plain: true }));
       console.log(posts);
-      console.log(dbPostData[0]);
-      res.render("homepage", dbPostData[1].get({ plain: true }));
+      //console.log(dbPostData[0]);
+      res.render("homepage", { posts });
+      //res.render("homepage", dbPostData[1].get({ plain: true }));
       //   res.render("homepage", {
       //     posts,
       //     loggedIn: req.session.loggedIn,
@@ -37,6 +38,14 @@ router.get("/", (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+router.get("/login", (req, res) => {
+  // if (req.session.loggedIn) {
+  //   res.redirect("/");
+  //   return;
+  // }
+  res.render("login");
 });
 
 module.exports = router;
