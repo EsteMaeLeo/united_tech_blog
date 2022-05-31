@@ -25,7 +25,7 @@ router.get("/:id", (req, res) => {
     include: [
       {
         model: Post,
-        attributes: ["id", "title", "post_url", "created_at"],
+        attributes: ["id", "title", "post_text", "created_at"],
       },
       // include the Comment model here:
       {
@@ -65,12 +65,12 @@ router.post("/", (req, res) => {
     password: req.body.password,
   })
     .then(dbUserData => {
-      //   req.session.save(() => {
-      //     req.session.user_id = dbUserData.id;
-      //     req.session.username = dbUserData.username;
-      //     req.session.loggedIn = true;
-      //     res.json(dbUserData);
-      //   });
+      req.session.save(() => {
+        req.session.user_id = dbUserData.id;
+        req.session.username = dbUserData.username;
+        req.session.loggedIn = true;
+        res.json(dbUserData);
+      });
       res.json(dbUserData);
     })
     .catch(err => {
@@ -82,7 +82,7 @@ router.post("/", (req, res) => {
 router.post("/login", (req, res) => {
   User.findOne({
     where: {
-      email: req.body.email,
+      username: req.body.username,
     },
   }).then(dbUserData => {
     if (!dbUserData) {
@@ -118,8 +118,6 @@ router.post("/logout", (req, res) => {
 });
 // PUT /api/users/1
 router.put("/:id", (req, res) => {
-  // expects {username: 'Lernantino', email: 'lernantino@gmail.com', password: 'password1234'}
-
   // if req.body has exact key/value pairs to match the model, you can just use `req.body` instead
   User.update(req.body, {
     individualHooks: true,
