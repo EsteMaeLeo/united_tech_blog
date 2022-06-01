@@ -19,6 +19,7 @@ async function signupFormHandler(event) {
     // check the response status
     if (response.ok) {
       console.log("success");
+      document.location.replace("/");
     } else {
       alert(response.statusText);
     }
@@ -44,10 +45,12 @@ async function loginFormHandler(event) {
       }),
       headers: { "Content-Type": "application/json" },
     });
-
+    console.log(response.ok);
     if (response.ok) {
-      //document.location.replace("/dashboard");
-      alert("login");
+      document.location.replace("/dashboard");
+      //   let your_url = "/dashboard";
+      //   location.replace(your_url);
+      //alert("login");
     } else {
       alert(response.statusText);
     }
