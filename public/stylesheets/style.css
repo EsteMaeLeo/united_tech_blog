@@ -1,7 +1,7 @@
 :root {
     --primary-color: rgba(214, 210, 205, 0.8);
     --secondary-color: rgba(26, 25, 26, 0.8);
-
+    --tertiary-color: rgba(230, 199, 165, 0.8);
   }
 
 * {
@@ -30,7 +30,7 @@
   }
   
   button {
-    background-color: #225ca3;
+    background-color: #4e402e;
     border: 0;
     padding: 1%;
     color: white;
@@ -51,13 +51,14 @@
   
   textarea, input {
     padding: .5%;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+    border-radius: 15px;
+    border: 5px solid rgb(80, 78, 78);
+    background-color: var(--tertiary-color);
   }
   
   textarea:focus, input:focus {
     outline: none;
-    border: 1px solid #3486eb;
+    border: 7px solid #7fa2ce;
   }
   
   textarea {
@@ -135,32 +136,33 @@
     font-size: 90%;
     color: #7d7d7d;
   }
+
+  .post-list li{
+    padding: .5%;
+    border-radius: 15px;
+    border: 5px solid rgb(80, 78, 78);
+    background-color: var(--tertiary-color);
+  }
   
   .edit-link {
     display: block;
     margin: -1.5% 0 2% 0;
   }
   
-  .upvote-btn {
-    background-color: #197d0f;
-    transition: background-color .1s;
-  }
-  
-  .upvote-btn:hover {
-    background-color: #1f9c13;
-  }
-  
   .comment-form {
     margin-bottom: 5%;
+    
   }
   
   .comment {
     padding: 1%;
     margin-bottom: 1%;
+    border: 5px solid rgb(80, 78, 78);
+    background-color: var(--tertiary-color);
   }
   
   .comment:nth-child(odd) {
-    background-color: #fff5eb;
+    background-color: var(--tertiary-color);
   }
   
   .comment .meta {
